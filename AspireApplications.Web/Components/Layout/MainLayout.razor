@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+@using Blazored.Toast.Configuration
+
+<div id="layout-wrapper">
+    <NavMenu @rendermode="InteractiveServer" />
+
+    <div class="main-content">
+        <div class="page-content"> @Body </div>
+
+        <BlazoredToasts Position="ToastPosition.TopRight" Timeout="10" IconType="IconType.FontAwesome" SuccessClass="success-toast-override" SuccessIcon="fa fa-thumbs-up" ErrorIcon="fa fa-bug" />
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6"> <script>document.write(new Date().getFullYear())</script> © NgenX. </div>
+                    <div class="col-sm-6"> <div class="text-sm-end d-none d-sm-block"> Design & Develop with ❤️❤️ </div> </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

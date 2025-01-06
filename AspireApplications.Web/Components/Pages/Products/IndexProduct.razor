@@ -1,0 +1,119 @@
+﻿@page "/product"
+
+<PageTitle>Product List</PageTitle>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Product Records</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                        <li class="breadcrumb-item active">Product Records</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @if (products == null)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-success" role="status"> <span class="sr-only"> Loading..........................</span> </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row mb-2">
+                            <div class="col-sm">
+                                <div class="search-box me-2 d-inline-block">
+                                    <div class="position-relative">
+                                        <input type="text" @bind="SearchQuery" class="form-control" placeholder="Search..." style="width: 600px;" @onkeyup="SearchProducts"> <i class="bx bx-search-alt search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-auto"> <div class="text-sm-end"> <a href="product/create" class="btn btn-success btn-rounded" id="addProject-btn"><i class="mdi mdi-plus me-1"></i> Add New Product</a> </div> </div>
+                        </div>
+                        <table id="datatablesss" class="table table-bordered dt-responsive  nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ref</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in products)
+                                {
+                                    <tr>
+                                        <td>@product.Id</td>
+                                        <td>@product.ProductName</td>
+                                        <td>@product.Description</td>
+                                        <td>@product.Quantity</td>
+                                        <td>@product.Price</td>
+                                        <td>@product.CreatedOn.ToString("MMMM dd, yyyy")</td>
+                                        <td>
+                                            <ul class="list-unstyled hstack gap-1 mb-0">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
+                                                    <a href="product/edit/@product.Id" class="btn btn-sm btn-soft-dark"><span class="mdi mdi-pencil-outline"></span></a>
+                                                </li>
+
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                    <button @onclick="()=>{ deleteId=product.Id; Modal.Open(); }" class="btn btn-sm btn-soft-danger" type="button"><span class="mdi mdi-trash-can-outline"></span></button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-auto me-auto"> <p class="text-muted mb-0">Showing <b>@(StartIndex)</b> to <b>@(EndIndex)</b> of <b>@TotalCount</b> entries</p> </div>
+                            <div class="col-auto">
+                                <div class="card d-inline-block mb-0">
+                                    <div class="card-body p-2">
+                                        <nav aria-label="Page navigation example" class="mb-0">
+                                            <ul class="pagination mb-0">
+                                                <li class="page-item"> <a class="page-link" href="javascript:void(0);" @onclick="PreviousPage" aria-label="Previous" disabled="@IsFirstPage"> <span aria-hidden="true">&laquo;</span> </a> </li>
+                                                @for (int i = 1; i <= TotalPages; i++)
+                                                {
+                                                    <li class="page-item @(i == CurrentPage ? "active" : "")"> <a class="page-link" href="javascript:void(0);" @onclick="() => GoToPage(i)"> @i </a> </li>
+                                                }
+                                                <li class="page-item"> <a class="page-link" href="javascript:void(0);" @onclick="NextPage" aria-label="Next" disabled="@IsLastPage"> <span aria-hidden="true">&raquo;</span> </a> </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end col-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <AppModal @ref="Modal">
+            <Tittle>Product Delete Notification</Tittle>
+            <Body>
+                Please confirm if you want to delete this product?
+            </Body>
+            <Footer>
+                <button type="button" class="btn btn-primary" @onclick="DeleteProductRecord">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="()=> Modal.Close()">No</button>
+            </Footer>
+        </AppModal>
+    }
+</div>
+
+
+

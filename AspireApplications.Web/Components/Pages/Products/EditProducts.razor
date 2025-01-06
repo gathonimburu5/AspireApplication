@@ -1,0 +1,71 @@
+﻿@page "/product/edit/{ProdId:int}"
+@rendermode InteractiveServer
+<PageTitle>Edit Product</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Edit Product Records</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                        <li class="breadcrumb-item active">Update Record</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <EditForm OnValidSubmit="@UpdateProductRecords" Model="@product" FormName="editProduct">
+                        <div class="row mb-2 d-none">
+                            <div class="col-12">
+                                <InputNumber class="form-control" @bind-Value="product.Id" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Product Name</label>
+                                <InputText class="form-control" @bind-Value="product.ProductName" />
+                                <ValidationMessage For="() => product.ProductName" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Description</label>
+                                <InputText class="form-control" @bind-Value="product.Description" />
+                                <ValidationMessage For="() => product.Description" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Product Quantity</label>
+                                <InputNumber class="form-control" @bind-Value="product.Quantity" />
+                                <ValidationMessage For="() => product.Quantity" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Price</label>
+                                <InputNumber class="form-control" @bind-Value="product.Price" />
+                                <ValidationMessage For="() => product.Price" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="text-end">
+                                <button class="btn btn-outline-primary">Update Records <span class="fa fa-database">&nbsp;</span></button>
+                                <a class="btn btn-outline-danger" href="/product">Cancel</a>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
