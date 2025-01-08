@@ -1,5 +1,6 @@
 using AspireApplication.Models.Models;
 using AspireApplications.Services.Services;
+using CountryData.Standard;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddScoped<IProductInterface, ProductService>();
+builder.Services.AddScoped<CountryHelper>();
+builder.Services.AddScoped<ICountryInterface, CountryService>();
 
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();

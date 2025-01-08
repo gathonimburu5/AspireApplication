@@ -13,7 +13,7 @@ namespace AspireApplications.Web.Components.Pages.Products
         public IToastService toastService { get; set; }
         [Inject]
         public NavigationManager navigationManager { get; set; }
-        public Product product { get; set; } = new Product();
+        private Product product = new Product();
         public async Task SaveProductRecords()
         {
             Console.WriteLine($"products: {product.ProductName}, {product.Description}, {product.Quantity}, {product.Price}");

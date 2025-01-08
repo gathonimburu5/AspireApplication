@@ -1,0 +1,99 @@
+﻿@page "/country"
+
+<PageTitle>Country Records</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Country Records</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Country</a></li>
+                        <li class="breadcrumb-item active">Records</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @if (CountryList == null)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-success" role="status"> <span class="sr-only"> Loading..........................</span> </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row mb-2">
+                            <div class="col-sm"> </div>
+                            <div class="col-sm-auto"> 
+                                <div class="text-sm-end">
+                                    <div class="search-box me-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input type="text" @bind-value="SearchQuery" class="form-control" placeholder="Search..." style="width: 400px;" @oninput="SearchProducts"> <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <table id="datatablesss" class="table table-bordered dt-responsive  nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Short Code</th>
+                                    <th scope="col">Country Name</th>
+                                    <th scope="col">Phone Code</th>
+                                    <th scope="col">Flag Emoji</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var country in CountryList)
+                                {
+                                    <tr>
+                                        <td>@country.ShortCode</td>
+                                        <td>@country.CountryName</td>
+                                        <td>@country.PhoneCode</td>
+                                        <td>@country.CountryFlag</td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-auto me-auto"> <p class="text-muted mb-0">Showing <b>@(StartIndex)</b> to <b>@(EndIndex)</b> of <b>@TotalCount</b> entries</p> </div>
+                            <div class="col-auto">
+                                <div class="card d-inline-block mb-0">
+                                    <div class="card-body p-2">
+                                        <nav aria-label="Page navigation example" class="mb-0">
+                                            <ul class="pagination mb-0">
+                                                <li class="page-item @(IsFirstPage ? "disabled" : "")"><button class="page-link" @onclick="PreviousPage" aria-label="Previous" disabled="@IsFirstPage"><span aria-hidden="true">&laquo;</span> </button></li>
+                                                @for (int i = 1; i <= PageSize; i++)
+                                                {
+                                                    <li class="page-item @(i == CurrentPage ? "active" : "")"><button class="page-link" @onclick="() => GoToPage(i)"> @i </button></li>
+                                                }
+                                                <li class="page-item @(IsLastPage ? "disabled" : "")"><button class="page-link" @onclick="NextPage" aria-label="Next" disabled="@IsLastPage"><span aria-hidden="true">&raquo;</span></button></li>
+                                            </ul>
+                                        </nav>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+

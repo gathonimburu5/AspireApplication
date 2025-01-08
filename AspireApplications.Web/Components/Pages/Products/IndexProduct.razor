@@ -34,7 +34,7 @@
                             <div class="col-sm">
                                 <div class="search-box me-2 d-inline-block">
                                     <div class="position-relative">
-                                        <input type="text" @bind="SearchQuery" class="form-control" placeholder="Search..." style="width: 600px;" @onkeyup="SearchProducts"> <i class="bx bx-search-alt search-icon"></i>
+                                        <input type="text" @bind-value="SearchQuery" class="form-control" placeholder="Search..." style="width: 600px;" @oninput="SearchProducts"> <i class="bx bx-search-alt search-icon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +64,8 @@
                                         <td>@product.CreatedOn.ToString("MMMM dd, yyyy")</td>
                                         <td>
                                             <ul class="list-unstyled hstack gap-1 mb-0">
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
-                                                    <a href="product/edit/@product.Id" class="btn btn-sm btn-soft-dark"><span class="mdi mdi-pencil-outline"></span></a>
-                                                </li>
-
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                                    <button @onclick="()=>{ deleteId=product.Id; Modal.Open(); }" class="btn btn-sm btn-soft-danger" type="button"><span class="mdi mdi-trash-can-outline"></span></button>
-                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Update"> <a href="product/edit/@product.Id" class="btn btn-sm btn-soft-dark"><span class="mdi mdi-pencil-outline"></span></a> </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"> <button @onclick="()=>{ deleteId=product.Id; Modal.Open(); }" class="btn btn-sm btn-soft-danger" type="button"><span class="mdi mdi-trash-can-outline"></span></button></li>
                                             </ul>
                                         </td>
                                     </tr>

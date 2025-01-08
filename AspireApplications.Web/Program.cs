@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add service defaults & Aspire client integrations.
 builder.Services.AddTransient<IHttpClient, HttpClientFactory>();
 builder.Services.AddScoped<IProductInterface, ProductService>();
+builder.Services.AddScoped<ICountryInterface, CountryService>();
 
 builder.AddServiceDefaults();
 

@@ -78,7 +78,7 @@ namespace AspireApplications.Web.Components.Pages.Products
             }
         }
 
-        private async Task SearchProducts(KeyboardEventArgs e)
+        private async Task SearchProducts()
         {
             if (!string.IsNullOrEmpty(SearchQuery))
             {
