@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@inject IFileVersionProvider FileVersionProvider
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,6 +16,9 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="favicon.png" />
+    @* Bootstrap 5 *@
+    <link href=@AppendVersion("_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css") rel="stylesheet" />
+    @DxResourceManager.RegisterScripts()
 
     <HeadOutlet @rendermode="InteractiveServer" />
 </head>
@@ -47,3 +52,7 @@
 </body>
 
 </html>
+
+@code {
+    private string AppendVersion(string path) => FileVersionProvider.AddFileVersionToPath("/", path);
+}

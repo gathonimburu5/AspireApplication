@@ -6,14 +6,14 @@ namespace AspireApplications.Web.Service
 {
     public interface ICountryInterface
     {
-        Task<List<CustomizedCountry>> GetCountryRecords(int offset = 1, int limit = 20, string? searchQuery = null);
+        Task<List<CustomizedCountry>> GetCountryRecords(int offset = 1, int limit = 10, string? searchQuery = null);
         Task<List<CustomizedCurrency>> GetCurrencyRecordsPerCountryCode(string code);
         Task<List<CustomizedRegion>> GetRegionRecordsPerCountryCode(string code, int offset = 1, int limit = 10, string? searchQuery = null);
     }
 
     public class CountryService(IHttpClient httpService) : ICountryInterface
     {
-        public Task<List<CustomizedCountry>> GetCountryRecords(int offset = 1, int limit = 20, string? searchQuery = null)
+        public Task<List<CustomizedCountry>> GetCountryRecords(int offset = 1, int limit = 10, string? searchQuery = null)
         {
             List<CustomizedCountry> res = new List<CustomizedCountry>();
             var client = httpService.CreateHttpClient();

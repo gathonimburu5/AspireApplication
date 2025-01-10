@@ -30,7 +30,7 @@ namespace AspireApplications.ApiService.Controllers
 
         [HttpGet]
         [Route("GetCustomizedCountryRecord")]
-        public async Task<IActionResult> GetCustomizedCountryRecord(int offset = 1, int limit = 10, string? searchQuery = null)
+        public async Task<IActionResult> GetCustomizedCountryRecord(int offset = 1, int limit = 20, string? searchQuery = null)
         {
             var country = await countryService.getCountryRecordsAsync(offset, limit, searchQuery);
             logger.LogInformation("Class:CountryController | Method:GetCustomizedCountryRecord | Start method | Params {0}", country.ToString());

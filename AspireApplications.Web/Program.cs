@@ -2,6 +2,7 @@ using AspireApplications.Web;
 using AspireApplications.Web.Components;
 using AspireApplications.Web.Service;
 using Blazored.Toast;
+using DevExpress.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
 builder.Services.AddOutputCache();
 builder.Services.AddBlazoredToast();
+builder.Services.AddDevExpressBlazor(configure => configure.BootstrapVersion = BootstrapVersion.v5);
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
